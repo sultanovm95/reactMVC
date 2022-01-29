@@ -5,9 +5,16 @@ import Table from './Table';
 import Form from './form';
 import './index.css';
 
+
+function requestUpdate() {
+  var timeStamp = Date.now();
+  window.localStorage.setItem('LastUpdated', timeStamp);
+}
+
 function MyApp() {
+
   const [characters, setCharacters] = useState([]);
-  
+
     async function fetchAll() {
     try {
       const response = await axios.get('http://localhost:3030/users');
@@ -47,10 +54,8 @@ function MyApp() {
         setCharacters([...characters, result.data.result]);
       }
     });
-
-    let processId = Math.random();
-    window.localStorage.setItem('demo', processId);
-    console.log("Sending delete! Process ID: " + processId);
+    
+    requestUpdate();
   }
 
   function deleteById(id) {
@@ -67,9 +72,7 @@ function MyApp() {
       }
     });
 
-    let processId = Math.random();
-    window.localStorage.setItem('demo', processId);
-    console.log("Sending delete! Process ID: " + processId);
+    requestUpdate();
   }
 
 

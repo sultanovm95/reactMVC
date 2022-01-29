@@ -1,4 +1,4 @@
-const CHANNEL_NAME = 'demo';
+const CHANNEL_NAME = 'LastUpdated';
 const CHECK_INTERVAL = 50;
 
 let previousMessage = window.localStorage.getItem(CHANNEL_NAME);
