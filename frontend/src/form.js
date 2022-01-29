@@ -43,7 +43,7 @@ function submitForm() {
         value={person.job}
         onChange={handleChange} />
     </form>
-	<input type="button" value="Submit" onClick={submitForm} />
+	<input id="submitSignal" type="button" value="Submit" onClick={submitForm} />
 	</div> 
 	
 ); 

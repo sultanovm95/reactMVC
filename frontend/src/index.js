@@ -5,12 +5,10 @@ import Table from './Table';
 import Form from './form';
 import './index.css';
 
-
 function MyApp() {
-
   const [characters, setCharacters] = useState([]);
-
-  async function fetchAll() {
+  
+    async function fetchAll() {
     try {
       const response = await axios.get('http://localhost:3030/users');
       console.log(response.data.data.allUsers);
