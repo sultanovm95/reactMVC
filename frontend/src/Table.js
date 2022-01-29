@@ -8,7 +8,7 @@ function TableBody (props) {
 			<td>{row.job}</td>
 			<td>{row._id}</td>
 			<td>
-				<input type="button" value="Delete" onClick={() => props.removeCharacter(row._id)} />
+				<input id = "deleteSignal" type="button" value="Delete" onClick={() => props.removeCharacter(row._id)} />
 			</td>
 		</tr>
 	  );

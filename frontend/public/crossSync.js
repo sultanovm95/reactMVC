@@ -1,12 +1,21 @@
 const CHANNEL_NAME = 'demo';
 const CHECK_INTERVAL = 250;
 
+let countR = 1;
+let countS = 1;
+
 document.addEventListener("DOMContentLoaded", () => {
 
-  const submitSigalButton = document.querySelector('#submitSignal');
+  window.onload = function() {
+    const submitSigalButton = document.querySelector('#submitSignal');
+    submitSigalButton.addEventListener('click', updatePage);
+  
+  // Question: Why it can not recognize [NULL]
+  //const deleteSigalButton = document.querySelector('#deleteSignal');
+  //deleteSigalButton.addEventListener('click', updatePage);
 
-  let countR = 1;
-  let countS = 1;
+  }
+ 
   let previousMessage;
 
   if (window.localStorage) {
@@ -25,14 +34,15 @@ document.addEventListener("DOMContentLoaded", () => {
         
       }
     }, CHECK_INTERVAL);
+
     window.localStorage.removeItem(CHANNEL_NAME);
-    
-    submitSigalButton.addEventListener('click', e => {
-      const message = countS;
-      window.localStorage.setItem(CHANNEL_NAME, message);
-      console.log("Sent a message: " + countS);
-      countS++;
-    });
   }
 
 });
+
+function updatePage() {
+  const message = countS;
+  window.localStorage.setItem(CHANNEL_NAME, message);
+  console.log("Sent a message: " + countS);
+  countS++;
+}

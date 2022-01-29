@@ -28,7 +28,6 @@ mongoose.connect(database, {
 // Routers
 app.use('/users', userRouter);
 
-
 // PORT NUMBER 3030
 const PORT = 3030;
 app.listen(PORT, () => {
