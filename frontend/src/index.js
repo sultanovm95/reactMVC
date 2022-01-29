@@ -5,13 +5,16 @@ import Table from './Table';
 import Form from './form';
 import './index.css';
 
+var timeStamp;
 
 function requestUpdate() {
-  var timeStamp = Date.now();
+  timeStamp = Date.now();
   window.localStorage.setItem('LastUpdated', timeStamp);
 }
 
 function MyApp() {
+
+  var firstRun = 1;
 
   const [characters, setCharacters] = useState([]);
 
@@ -27,14 +30,24 @@ function MyApp() {
       return false;
     }
   }
-
   useEffect(() => {
-    fetchAll().then( result => {
-      if(result) {
-        setCharacters(result);
-      }
+    if(firstRun === 1) {
+      fetchAll().then( result => {
+        if(result) {
+          setCharacters(result);
+        }
+      });
+      firstRun++;
+    }
+    window.addEventListener('storage', () => {
+      fetchAll().then( result => {
+        if(result) {
+          setCharacters(result);
+        }
+      });
     });
-  }, []);
+   
+  }, [firstRun]);
 
   async function makePostCall(person) {
     try {
