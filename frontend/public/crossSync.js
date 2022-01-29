@@ -1,37 +1,18 @@
 const CHANNEL_NAME = 'demo';
-const CHECK_INTERVAL = 250;
+const CHECK_INTERVAL = 50;
 
-let countR = 1;
-let countS = 1;
-
+let previousMessage = window.localStorage.getItem(CHANNEL_NAME);
 document.addEventListener("DOMContentLoaded", () => {
-
-  window.onload = function() {
-    const submitSigalButton = document.querySelector('#submitSignal');
-    submitSigalButton.addEventListener('click', updatePage);
-  
-  // Question: Why it can not recognize [NULL]
-  //const deleteSigalButton = document.querySelector('#deleteSignal');
-  //deleteSigalButton.addEventListener('click', updatePage);
-
-  }
  
-  let previousMessage;
+  const submitSigalButton = document.querySelector('#submitSignal');
+  submitSigalButton.addEventListener('click', sendMessage);
 
   if (window.localStorage) {
     setInterval(() => {
       const message = window.localStorage.getItem(CHANNEL_NAME);
       if (message !== previousMessage){
-        console.log("Recieved a message: " + countR);
-        countR++;
         previousMessage = message;
-        
-        if(countR === 2) {
-          console.log("Just updated!")
-        } else {
-          window.location.reload(false);
-        }
-        
+        window.location.reload(false);
       }
     }, CHECK_INTERVAL);
 
@@ -40,9 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-function updatePage() {
-  const message = countS;
-  window.localStorage.setItem(CHANNEL_NAME, message);
-  console.log("Sent a message: " + countS);
-  countS++;
+function sendMessage() {
+  window.localStorage.removeItem(CHANNEL_NAME);
 }

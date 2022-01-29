@@ -47,6 +47,10 @@ function MyApp() {
         setCharacters([...characters, result.data.result]);
       }
     });
+
+    let processId = Math.random();
+    window.localStorage.setItem('demo', processId);
+    console.log("Sending delete! Process ID: " + processId);
   }
 
   function deleteById(id) {
@@ -62,6 +66,10 @@ function MyApp() {
         setCharacters(updated);
       }
     });
+
+    let processId = Math.random();
+    window.localStorage.setItem('demo', processId);
+    console.log("Sending delete! Process ID: " + processId);
   }
 
 
